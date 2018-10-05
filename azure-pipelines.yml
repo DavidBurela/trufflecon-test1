@@ -20,10 +20,10 @@ steps:
 - script: |
     npx truffle test
   displayName: 'run tests'
-  continueOnError: true
 
 # Publish Test Results
 - task: PublishTestResults@2
+  condition: always
   inputs:
     testResultsFormat: 'JUnit' # Options: JUnit, NUnit, VSTest, xUnit
     testResultsFiles: '**/TEST-*.xml' 
