@@ -14,8 +14,13 @@ steps:
 
 - script: |
     npm install
-    npx truffle test
+    npx truffle compile
   displayName: 'npm install and build'
+
+- script: |
+    npx truffle test
+  displayName: 'run tests'
+  continueOnError: true
 
 # Publish Test Results
 - task: PublishTestResults@2
