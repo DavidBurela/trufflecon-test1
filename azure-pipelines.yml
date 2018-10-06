@@ -28,7 +28,9 @@ steps:
 - script: |
     npx solidity-coverage
     npx istanbul report --include coverage.json --dir ./cobertura-coverage cobertura
-  displayName: 'run tests'
+    ls
+    ls cobertura-coverage
+  displayName: 'run coverage tool'
 
 - task: PublishCodeCoverageResults@1
   inputs:
