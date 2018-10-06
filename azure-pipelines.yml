@@ -28,14 +28,13 @@ steps:
 - script: |
     npx solidity-coverage
     npx istanbul report --include coverage.json --dir ./cobertura-coverage cobertura
-    ls
-    ls cobertura-coverage
+    npx istanbul report --include coverage.json --dir ./cobertura-coverage html
   displayName: 'run coverage tool'
 
 - task: PublishCodeCoverageResults@1
   inputs:
     codeCoverageTool: 'cobertura' # Options: cobertura, jaCoCo
     summaryFileLocation: '**/cobertura-coverage.xml'
-    #reportDirectory: # Optional
+    reportDirectory: 'cobertura-coverage'
     #additionalCodeCoverageFiles: # Optional
     #failIfCoverageEmpty: false # Optional
