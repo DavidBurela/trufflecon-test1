@@ -15,11 +15,8 @@ steps:
 - script: |
     npm install
     npx truffle compile
-  displayName: 'npm install and build'
-
-- script: |
     npx truffle test
-  displayName: 'run tests'
+  displayName: 'npm install and build'
 
 # Publish Test Results
 - task: PublishTestResults@2
@@ -27,3 +24,16 @@ steps:
   inputs:
     testResultsFormat: 'JUnit' # Options: JUnit, NUnit, VSTest, xUnit
     testResultsFiles: '**/TEST-*.xml' 
+
+- script: |
+    npx solidity-coverage
+    npx istanbul report --include coverage.json --dir ./cobertura-coverage cobertura
+  displayName: 'run tests'
+
+- task: PublishCodeCoverageResults@1
+  inputs:
+    codeCoverageTool: 'cobertura' # Options: cobertura, jaCoCo
+    summaryFileLocation: 'cobertura-coverage/cobertura-coverage.xml'
+    #reportDirectory: # Optional
+    #additionalCodeCoverageFiles: # Optional
+    #failIfCoverageEmpty: false # Optional
